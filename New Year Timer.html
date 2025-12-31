@@ -4,17 +4,32 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>2026 New Year Countdown Timer</title>
+  <style>
+    body{
+      display: flex;
+    }
+    #countdown{
+      word-spacing: 0.5px;
+      justify-content: center;
+      align-items: center;
+    }
+    #extra{
+      justify-content: center;
+      align-items: flex-end;
+    }
+  </style>
 </head>
 <body>
 
 <div id="countdown"></div>
-
+<div id="extra"></div>
 <script>
   // Set the date we're counting down to
   const countDownDate = new Date("Jan 1, 2026 00:00:00").getTime();
 
   // Update the countdown every 1 second
   const countdownElement = document.getElementById("countdown");
+  const extraElement = document.getElementById("extra");
   const countdownInterval = setInterval(function() {
 
     // Get the current date and time
@@ -30,12 +45,70 @@
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
     // Display the countdown
-    countdownElement.innerHTML = `<h3>${days}d ${hours}h ${minutes}m ${seconds}s</h3>`;
+    countdownElement.innerHTML = `<h3>${days} days ${hours} hours ${minutes} minutes ${seconds} seconds</h3> left`;
+    let color = "#000"
+if (days === 7) {
+  color = "#3dacdb";
+} else if (days === 0 && hours === 0 && minutes === 0 && seconds <= 10) {
+  if (days === 0 && hours === 0 && minutes === 0 && seconds <= 1) {
+    countdownElement.innerHTML = "<h1>1 second left</h1>";
+  } else if (days === 0 && hours === 0 && minutes === 0 && seconds <= 2) {
+    countdownElement.innerHTML = "<h1>2 seconds left</h1>";
+  } else if (days === 0 && hours === 0 && minutes === 0 && seconds <= 3) {
+    countdownElement.innerHTML = "<h1>3 seconds left</h1>";
+  } else if (days === 0 && hours === 0 && minutes === 0 && seconds <= 4) {
+    countdownElement.innerHTML = "<h1>4 second left</h1>";
+  } else if (days === 0 && hours === 0 && minutes === 0 && seconds <= 5) {
+    countdownElement.innerHTML = "<h1>5 second left</h1>";
+  } else if (days === 0 && hours === 0 && minutes === 0 && seconds <= 6) {
+    countdownElement.innerHTML = "<h1>6 seconds left</h1>";
+  } else if (days === 0 && hours === 0 && minutes === 0 && seconds <= 7) {
+    countdownElement.innerHTML = "<h1>7 seconds left</h1>";
+  } else if (days === 0 && hours === 0 && minutes === 0 && seconds <= 8) {
+    countdownElement.innerHTML = "<h1>8 seconds left</h1>";
+  } else if (days === 0 && hours === 0 && minutes === 0 && seconds <= 9) {
+    countdownElement.innerHTML = "<h1>9 seconds left</h1>";
+  }
+  extraElement.innerHTML = `
+    <video width="320" height="240" autoplay>
+      <source src="FireworkFail.mp4" type="video/mp4">
+      Your browser does not support this MP4 video of a Firework.
+    </video>`;
+  color = "#cc0000";
+} else if (days === 0 && hours === 0 && minutes === 0 && seconds <= 14) {
+  extraElement.innerHTML = "<h2>14 second mark!</h2>"
+  color = "#e37d30";
+} else if (days === 0 && hours === 0 && minutes === 0 && seconds <= 20) {
+  extraElement.innerHTML = "<h2>20 second mark!</h2>"
+  color = "#5b58f5";
+} else if (days === 0 && hours === 0 && minutes === 0 && seconds == 50) {
+  extraElement.innerHTML = `
+    <video width="320" height="240" autoplay>
+      <source src="GrandFirework.mp4" type="video/mp4">
+      Your browser does not support this MP4 video of the Grand Firework.
+    </video>`;
+    color = "#123499";
+} else if (days === 0 && hours === 0 && minutes === 0) {
+  extraElement.innerHTML = "<h2>The last minute of the year!</h2>";
+  color = "#00c3c3";
+} else if (days === 0 && hours === 0) {
+  extraElement.innerHTML = "<h2>The last hour of the year!</h2><p>Getting quite close</p>";
+  color = "#db720f";
+} else if (days === 0) {
+  extraElement.innerHTML = "<h2>The last day of the year!</h2>";
+  color = "#3d7adb";
+}
+
+countdownElement.style.color = color;
 
     // If the countdown is over, display a message and stop the interval
     if (distance < 0) {
-      clearInterval(countdownInterval);
       countdownElement.innerHTML = `<h1>HAPPY 2026 NEW YEAR!</h1>`;
+    }
+    if (distance < -86400000) {
+      clearInterval(countdownInterval);
+      countdownElement.innerHTML = `<h1>2026 New Year Ended...</h1>`;
+      extraElement.innerHTML = `<p>Website Expired... I guess?</p>`
     }
   }, 1000);
 </script>
